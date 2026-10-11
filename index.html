@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Study Planner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+    <h1>Student Study Planner</h1>
+    <p>Organize your study schedule and track your progress</p>
+</header>
+
+<main class="container">
+    <section class="card">
+        <h2 id="formTitle">Add Study Task</h2>
+        <input type="hidden" id="taskId">
+
+        <div class="grid">
+            <div>
+                <label for="subject">Subject</label>
+                <input id="subject" type="text" placeholder="e.g. Operating Systems">
+            </div>
+            <div>
+                <label for="topic">Topic</label>
+                <input id="topic" type="text" placeholder="e.g. CPU Scheduling">
+            </div>
+            <div>
+                <label for="studyDate">Study Date</label>
+                <input id="studyDate" type="date">
+            </div>
+            <div>
+                <label for="studyTime">Study Time</label>
+                <input id="studyTime" type="time">
+            </div>
+            <div>
+                <label for="status">Status</label>
+                <select id="status">
+                    <option value="Pending">Pending</option>
+                    <option value="Completed">Completed</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button onclick="saveTask()">Save Task</button>
+            <button class="secondary" onclick="clearForm()">Clear</button>
+        </div>
+        <p id="message"></p>
+    </section>
+
+    <section class="card">
+        <div class="list-header">
+            <h2>My Study Tasks</h2>
+            <button class="secondary" onclick="loadTasks()">Refresh</button>
+        </div>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Subject</th>
+                        <th>Topic</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="taskTable"></tbody>
+            </table>
+        </div>
+        <p id="emptyMessage">No study tasks added yet.</p>
+    </section>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
