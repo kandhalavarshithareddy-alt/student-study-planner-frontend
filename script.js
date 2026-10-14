@@ -1,4 +1,5 @@
-const API_URL = "http://localhost:8080/api/tasks";
+const API_BASE_URL = (window.STUDY_PLANNER_API_URL || "http://localhost:8080").replace(/\/+$/, "");
+const API_URL = `${API_BASE_URL}/api/tasks`;
 
 document.addEventListener("DOMContentLoaded", loadTasks);
 

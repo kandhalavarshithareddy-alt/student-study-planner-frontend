@@ -1,0 +1,1 @@
+window.STUDY_PLANNER_API_URL = "http://localhost:8080";
