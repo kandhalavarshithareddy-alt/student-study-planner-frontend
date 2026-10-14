@@ -1,5 +1,5 @@
-const API_BASE_URL = (window.STUDY_PLANNER_API_URL || "http://localhost:8080").replace(/\/+$/, "");
-const API_URL = `${API_BASE_URL}/api/tasks`;
+const API_BASE_URL = String(window.STUDY_PLANNER_API_URL || "").replace(/\/+$/, "");
+const API_URL = API_BASE_URL ? `${API_BASE_URL}/api/tasks` : null;
 
 document.addEventListener("DOMContentLoaded", loadTasks);
 
@@ -10,7 +10,15 @@ function showMessage(message, error = false) {
     setTimeout(() => el.textContent = "", 2500);
 }
 
+function hasConfiguredApi() {
+    if (API_URL) return true;
+    showMessage("Backend is not deployed for this website yet.", true);
+    return false;
+}
+
 async function loadTasks() {
+    if (!hasConfiguredApi()) return;
+
     try {
         const response = await fetch(API_URL);
         if (!response.ok) throw new Error("Backend unavailable");
@@ -49,6 +57,8 @@ async function loadTasks() {
 }
 
 async function saveTask() {
+    if (!hasConfiguredApi()) return;
+
     const id = document.getElementById("taskId").value;
 
     const task = {
@@ -83,6 +93,8 @@ async function saveTask() {
 }
 
 async function editTask(id) {
+    if (!hasConfiguredApi()) return;
+
     try {
         const response = await fetch(`${API_URL}/${id}`);
         if (!response.ok) throw new Error("Task not found");
@@ -104,6 +116,8 @@ async function editTask(id) {
 }
 
 async function completeTask(id) {
+    if (!hasConfiguredApi()) return;
+
     try {
         const response = await fetch(`${API_URL}/${id}`);
         if (!response.ok) throw new Error("Task not found");
@@ -127,6 +141,8 @@ async function completeTask(id) {
 }
 
 async function deleteTask(id) {
+    if (!hasConfiguredApi()) return;
+
     if (!confirm("Are you sure you want to delete this task?")) return;
 
     try {
